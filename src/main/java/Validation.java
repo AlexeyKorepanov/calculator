@@ -1,4 +1,5 @@
 import exceptions.DuplicateMathematicalSymbol;
+import exceptions.EmptyString;
 import exceptions.IncorrectFirstCharacter;
 import exceptions.InvalidCharacter;
 
@@ -6,7 +7,11 @@ import exceptions.InvalidCharacter;
 public class Validation {
 
 
-    public static void checkingFormula (String example) throws IncorrectFirstCharacter, DuplicateMathematicalSymbol, InvalidCharacter {
+    public static void checkingFormula (String example) throws IncorrectFirstCharacter,
+            DuplicateMathematicalSymbol, InvalidCharacter, EmptyString {
+        if (example.isEmpty()){
+            throw new EmptyString("Нет данных для вычеслений");
+        }
         for (int i = 0; i<example.length(); i++){
 
             if(Character.isDigit(example.charAt(i))) continue;

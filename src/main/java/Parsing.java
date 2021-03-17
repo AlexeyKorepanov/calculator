@@ -4,18 +4,18 @@ public class Parsing {
 
     public static String getFormulaRPN (String enteredExample){
         String example = enteredExample.replace("(-", "(0-");
-        String formulaRPN = "";
+        StringBuilder formulaRPN = new StringBuilder();
         Stack<Character> temporaryStorage = new Stack<>();
 
         for (char symbol : example.toCharArray() ) {
 
             if(Character.isDigit(symbol) || symbol == '.'){
-                formulaRPN += symbol;
+                formulaRPN.append(symbol);
                 continue;
             }
 
             if(MathematicalSigns.useSigns.containsKey(symbol)){
-                formulaRPN += " ";
+                formulaRPN.append(" ");
             }
 
             if(!temporaryStorage.empty()){
@@ -25,30 +25,28 @@ public class Parsing {
                 }
                 if(symbol == ')'){
                     while (temporaryStorage.peek() != '('){
-                        formulaRPN += temporaryStorage.pop();
+                        formulaRPN.append(temporaryStorage.pop());
                     }
                     temporaryStorage.pop();
                     continue;
                 }
 
-                if(MathematicalSigns.getPriority(symbol) > MathematicalSigns.getPriority(temporaryStorage.peek())){
-                    temporaryStorage.push(symbol);
-                    continue;
-                } else {
+                if (MathematicalSigns.getPriority(symbol) <= MathematicalSigns.getPriority(temporaryStorage.peek())) {
                     while (!temporaryStorage.empty()
-                            && MathematicalSigns.getPriority(temporaryStorage.peek()) >= MathematicalSigns.getPriority(symbol)){
-                        formulaRPN += temporaryStorage.pop();
+                            && MathematicalSigns.getPriority(temporaryStorage.peek()) >= MathematicalSigns.getPriority(symbol)) {
+                        formulaRPN.append(temporaryStorage.pop());
                     }
-                    temporaryStorage.push(symbol);
-                    continue;
                 }
+                temporaryStorage.push(symbol);
+                continue;
             }
             temporaryStorage.push(symbol);
         }
         while (!temporaryStorage.empty()){
-            formulaRPN += temporaryStorage.pop();
+            formulaRPN.append(temporaryStorage.pop());
         }
-        return formulaRPN ;
+        System.out.println(formulaRPN);
+        return formulaRPN.toString();
     }
 
 }
