@@ -1,10 +1,12 @@
+package body;
+
 import exceptions.DuplicateMathematicalSymbol;
 import exceptions.EmptyString;
 import exceptions.IncorrectFirstCharacter;
 import exceptions.InvalidCharacter;
 
 
-public class Validation {
+public class Validation  {
 
 
     public static void checkingFormula (String example) throws IncorrectFirstCharacter,

@@ -1,3 +1,5 @@
+package body;
+
 import exceptions.DivisionByZero;
 import exceptions.InvalidCharacter;
 
@@ -34,7 +36,7 @@ public class Calculation {
                 double secondNumber = answer.pop(), firstNumber = answer.pop();
                 answer.push(MathematicalSigns.calculateValue(firstNumber, secondNumber, formulaRPN.charAt(i)));
             } catch (Exception insufficientData){
-                throw new InvalidCharacter("Недостаточно данных для вычисления") ;
+                throw new InvalidCharacter("Пример не дописан.") ;
             }
 
         }

@@ -1,0 +1,5 @@
+positive\TestCalculation.class
+negative\TestValidationNeg.class
+positive\TestValidation.class
+positive\TestParsing.class
+negative\TestCalculationNeg.class

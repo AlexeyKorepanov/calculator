@@ -1,8 +1,12 @@
+package body;
+
+import exceptions.InvalidCharacter;
+
 import java.util.Stack;
 
 public class Parsing {
 
-    public static String getFormulaRPN (String enteredExample){
+    public static String getFormulaRPN (String enteredExample) throws InvalidCharacter {
         String example = enteredExample.replace("(-", "(0-");
         StringBuilder formulaRPN = new StringBuilder();
         Stack<Character> temporaryStorage = new Stack<>();
@@ -24,9 +28,13 @@ public class Parsing {
                     continue;
                 }
                 if(symbol == ')'){
-                    while (temporaryStorage.peek() != '('){
-                        formulaRPN.append(temporaryStorage.pop());
-                    }
+                   try {
+                       while (temporaryStorage.peek() != '('){
+                           formulaRPN.append(temporaryStorage.pop());
+                       }
+                   } catch (Exception e){
+                       throw new InvalidCharacter("Лишняя закрывающая скобка.");
+                   }
                     temporaryStorage.pop();
                     continue;
                 }
@@ -45,7 +53,7 @@ public class Parsing {
         while (!temporaryStorage.empty()){
             formulaRPN.append(temporaryStorage.pop());
         }
-        System.out.println(formulaRPN);
+       // System.out.println(formulaRPN.toString());
         return formulaRPN.toString();
     }
 

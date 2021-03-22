@@ -1,3 +1,5 @@
+package body;
+
 import exceptions.*;
 
 public class Main {
